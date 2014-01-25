@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem "gibbon"
 gem 'haml'
-
+gem 'pg'
 gem 'rails_12factor', group: :production
 
 group :doc do
