@@ -19,4 +19,3 @@ development:
   encoding: unicode
   database: mailchimp_post_development
   pool: 5
-  password:

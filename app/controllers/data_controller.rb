@@ -5,6 +5,12 @@ class DataController < ApplicationController
     render :text => logit(params) if params.present? && params.length > 2  #action & controller
   end
 
+  def show
+    render :text => logit(params) 
+  end
+
+  def update
+  end  
   def create
     #curl --data "email=hello@world.com&id=xyzlmnop&list_id=12345689&name=whats up doc&misc1=misc1 data&mist2=mist 2 day" http://localhost:3000/data    
     render :text => logit(params)    

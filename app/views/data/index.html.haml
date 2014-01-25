@@ -1,13 +1,19 @@
+%h4 Finding your Mailchimp API Key
+http://kb.mailchimp.com/article/where-can-i-find-my-api-key
+
+%h1 POST URL
+%p http://localhost:3000/data/API_KEY
+
 %h1 Example GET parameters
-%p http://localhost:3000/?id=18he83huhu7339huuh29uhu9ude92d-us2&list_id=e24fgz493&email=hello@world.com&FNAME=buster&lname=bluth&MERGE1=merge 1 data&MERGE2=merge 2 data
+%p http://localhost:3000/data/18he83huhu7339huuh29uhu9ude92d-us?list_id=e24fgz493&email=hello@world.com&FNAME=buster&lname=bluth&MERGE1=merge 1 data&MERGE2=merge 2 data
 
 %h1 Using curl / POST
-%p curl --data "id=18he83huhu7339huuh29uhu9ude92d-us&list_id=e24fgz493&email=hello@world.com&FNAME=the dude&MERGE1=misc1 here&MERGE2=misc 2 here" http://localhost:3000/data    
+%p curl --data "?list_id=e24fgz493&email=hello@world.com&FNAME=the dude&MERGE1=misc1 here&MERGE2=misc 2 here" http://localhost:3000/data/18he83huhu7339huuh29uhu9ude92d-us    
 
 %h1 Parameters
 %p
   %strong required
-  id - where ID is an API key
+  data/YOURAPIKEY/
   %br
   list_id
   %br
