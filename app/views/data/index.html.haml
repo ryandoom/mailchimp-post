@@ -1,0 +1,29 @@
+%h1 Example GET parameters
+%p http://localhost:3000/?id=18he83huhu7339huuh29uhu9ude92d-us2&list_id=e24fgz493&email=hello@world.com&FNAME=buster&lname=bluth&MERGE1=merge 1 data&MERGE2=merge 2 data
+
+%h1 Using curl / POST
+%p curl --data "id=18he83huhu7339huuh29uhu9ude92d-us&list_id=e24fgz493&email=hello@world.com&FNAME=the dude&MERGE1=misc1 here&MERGE2=misc 2 here" http://localhost:3000/data    
+
+%h1 Parameters
+%p
+  %strong required
+  id - where ID is an API key
+  %br
+  list_id
+  %br
+  email
+  %br
+%p
+  %strong example optional
+  double_optin
+  %br
+  MERGE1
+  %br
+  FNAME
+  %br
+  LNAME
+  %br
+
+
+
+
