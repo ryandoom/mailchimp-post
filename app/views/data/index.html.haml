@@ -30,6 +30,26 @@ http://kb.mailchimp.com/article/where-can-i-find-my-api-key
   LNAME
   %br
 
+%h1 For use with DNN Form Master
+%p 
+  Settings -> Other Settings set the URL:
+  http://mailchimp-post.herokuapp.com/data/YOUR_API_KEY
+%p
+  On the name field set Send Value by Options - Silent Post & Session
+  %br
+  value name will just be fname
+  %br if you have a first name and last name you will use fname and lname
+%p
+  On the email field Send Value by Options - Silent Post & Session
+  %br
+  set value name to email
+%p
+  Add a new hidden field called list_id, make sure to hide label and ensury the type is hidden.
+  %br
+  In the Auto fill set the default text to be the list id from mailchimp
+  %br
+  Send Value by Options - Silent Post & Session and set the value name to list_id
+%p
+  Add any other mailchimp variables as hidden fields and set default text and the value name as well as the silent post & session value
 
-
-
+%h4 You may need to go back and check on these fields, seems it doesn't save each time
