@@ -22,13 +22,18 @@ class DataController < ApplicationController
 
     double_optin = params[:double_optin].present? ? params[:double_optin] : false    
 
-    if params[:id].present? && params[:list_id].present? && params[:email].present?
+    email_message = params[:message].present? ? params[:message] : ""
+    #email_message = "WE are Wizard LinKBuilding experts who LOves the SKYpes and I don't Want you ON my MAILCHIMP... you mad BRO?"    
+    email_message.downcase!    
+    blacklist = ["india","linkbuilding","outsource","skype","iso 9001","cmmi","outsourcing","usd","madam","skype","link building","drugs","pharmacy","cheap"]
+    has_spam_content = blacklist.count {|bl| email_message.include? bl} != 0      
+  
+
+    if !has_spam_content && params[:id].present? && params[:list_id].present? && params[:email].present?
       gb = Gibbon::API.new(params[:id])
       gb.lists.subscribe({:id => params[:list_id], :email => {:email => params[:email]}, :merge_vars => params, :double_optin => double_optin})
     end
-    # if params.keys.count > 0
-    #   Payload.create!(:params => params.to_yaml)
-    # end
+
     return params
   end
 end

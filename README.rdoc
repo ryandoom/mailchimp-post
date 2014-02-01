@@ -10,3 +10,21 @@ You can even pass additional merge variables so that they can be used to trigger
 
 
 http://www.webascender.com
+
+
+== NOTES FOR THE BLACKLIST FEATURE
+
+This same logic isn't going to be applicable to everyone. You are welcome to fork the project if you want. We tend to get a lot of spam from companies specifically from india wanting to sell SEO and internet marketing services.  So, we have put in a feature that these people will not get added to our Mailchimp list. We want real prospects on our list, not spammers.
+
+
+Working on some basic blacklisting features for common spammy keywords
+
+email_message = "WE are Wizard LinKBuilding experts who LOves the SKYpes and I don't Want you ON my MAILCHIMP... you mad BRO?"
+
+blacklist = ["india","linkbuilding","outsource","skype","iso 9001","cmmi","outsourcing","usd","madam","skype","link building","drugs","pharmacy"]
+email_message.downcase!
+
+if blacklist.count {|bl| email_message.include? bl} == 0
+  #ONLY ADD THEM IF THEY DON'T HAVE ANY TEXT IN THE BLACKLIST
+  puts "Not blacklisted"
+end
