@@ -33,6 +33,8 @@ gem "gibbon"
 gem 'haml'
 gem 'pg'
 gem 'rails_12factor', group: :production
+gem 'constantcontact', '~> 1.1.0'
+gem 'simple_form'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

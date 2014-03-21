@@ -1,5 +1,11 @@
 MailchimpPost::Application.routes.draw do
-  
+
+  resources :cc, :except => [:show]
+  match "cc/:id" => "cc#index", :via => [:get,:post], :as => :cc_subscribe
+  match "auth/cc" => "cc#auth", :via => [:get,:post], :as => :cc_auth
+  match "auth/cc/start" => "cc#auth_start", :via => [:get,:post], :as => :cc_auth_start
+  match "auth/cc/end" => "cc#auth_end", :via => [:get,:post], :as => :cc_auth_end
+
   resources :data
   match "data/:id" => "data#index", :via => [:get,:post]
 

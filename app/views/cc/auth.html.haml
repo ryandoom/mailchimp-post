@@ -1,0 +1,14 @@
+%h3 Constant Contact Auth
+%hr
+
+%h4 Step One
+Set the Redirect URL for your Constant Contact key to #{cc_auth_end_url}.
+
+%hr
+
+%h4 Step Two
+= simple_form_for :api_credentials, :url => cc_auth_start_path do |f|
+  = f.input :api_key
+  = f.input :api_secret
+  %br
+  = f.submit "Continue", :class => "btn btn-success"
