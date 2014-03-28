@@ -2,7 +2,16 @@ class CcController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    render :text => logit(params) if params.present? && params.length > 2  #action & controller
+    @error = "No parameters received!" unless params.present? && params.length > 2  #action & controller
+    @error = "ID not found!" unless params.has_key? :id
+    @error = "No API Key received!" unless params.has_key? :api_key
+    @error = "No contact params received!" unless params.has_key? :contact
+    if @error.present?
+      render :text => @error
+    else
+      logit(params)
+      @lists = @ccapi.get_lists(params[:id])
+    end
   end
 
   def show
@@ -52,28 +61,27 @@ class CcController < ApplicationController
     blacklist = ["india","linkbuilding","outsource","skype","iso 9001","cmmi","outsourcing","usd","madam","skype","link building","drugs","pharmacy","cheap"]
     has_spam_content = blacklist.count {|bl| email_message.include? bl} != 0
 
-    if !has_spam_content && params[:id].present? && params[:list_id].present? && params[:email].present?
-      ccapi = ConstantContact::Api.new(params[:api_key])
+    if !has_spam_content && params.has_key?(:id) && params.has_key?(:api_key) && params.has_key?(:list_id) && params.has_key?(:contact)
+      @ccapi = ConstantContact::Api.new(params[:api_key])
       begin
         @contact = params[:contact]
-        @email = params[:email]
+        @email = @contact[:email] || params[:email]
 
         contact_params = params[:contact]
         contact_params['email_addresses'] = [{:email_address => @email}]
         contact_params['lists'] = [{:id => "#{params[:list_id]}"}]
 
-        # list = ccapi.get_list(params[:id], params[:list_id])
+        # list = @ccapi.get_list(params[:id], params[:list_id])
 
-        response = ccapi.get_contact_by_email params[:id], @email
+        response = @ccapi.get_contact_by_email params[:id], @email
         contact = ConstantContact::Components::Contact.create contact_params
         if response && response.respond_to?(:results) && response.results.any?
           contact.id = response.results.first.id.to_s
-          ccapi.update_contact params[:id], contact
+          @ccapi.update_contact params[:id], contact
         else
-          ccapi.add_contact params[:id], contact
+          @ccapi.add_contact params[:id], contact
         end
       end
-      # gb.lists.subscribe({:id => params[:list_id], :email => {:email => params[:email]}, :merge_vars => params, :double_optin => double_optin})
     end
 
     return params
