@@ -2,7 +2,7 @@ class DataController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    render :text => logit(params) if params.present? && params.length > 2  #action & controller
+    render :text => logit(params) if params.present? && params.length > 2 && !params.has_key?(:docs)  #action & controller
   end
 
   def show

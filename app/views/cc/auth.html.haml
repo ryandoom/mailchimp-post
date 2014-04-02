@@ -2,7 +2,10 @@
 %hr
 
 %h4 Step One
-Set the Redirect URL for your Constant Contact key to #{cc_auth_end_url}.
+%p
+  Set the Redirect URL for your Constant Contact key to
+  = succeed '.' do
+    %code= cc_auth_end_url
 
 %hr
 
