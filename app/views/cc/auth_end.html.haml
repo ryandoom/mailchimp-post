@@ -6,3 +6,7 @@
 %p To add contacts to a mailing list:
 %input.input{:type => "text", :value => URI.decode(cc_subscribe_url(@token, :api_key => session[:api_key], :list_id => "{LIST ID}", :contact => {:first_name => "{CONTACT FIRST NAME}", :last_name => "{CONTACT LAST NAME}", :email => "{CONTACT EMAIL ADDRESS}"}))}
 %p More contact data can be appended to the url with the syntax &contact[{KEY}]={VALUE}.
+
+%hr
+
+= render :partial => 'cc/mailing_list_table', :locals => {:lists => @lists}

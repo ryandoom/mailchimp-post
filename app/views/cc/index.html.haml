@@ -3,25 +3,4 @@
     Mailchimp Post
     %small Constant Contact
 
-- if @lists.any?
-  %h3 Your Lists
-  %table.table.table-bordered.table-striped
-    %thead
-      %tr
-        %th.text-center ID
-        %th Name
-        %th.text-center Contacts
-        %th.text-center Status
-    %tbody
-      - @lists.each do |list|
-        %tr
-          %td.text-center= list.id
-          %td= list.name
-          %td.text-center
-            %span{:class => "badge badge-#{list.contact_count>0 ? 'success' : 'default'}"}= list.contact_count
-          %td.text-center
-            %span{:class => "label label-#{list.status == 'ACTIVE' ? 'success' : 'default'}"}= list.status.titleize
-- else
-  .jumbotron
-    %h1 You have no lists!
-    %p There are no mailing lists in the Constant Contact account you provided!
+= render :partial => 'cc/mailing_list_table', :locals => {:lists => @lists}

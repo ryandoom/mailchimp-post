@@ -46,6 +46,9 @@ class CcController < ApplicationController
     if @code.present?
       response = @oauth.get_access_token(@code)
       @token = response['access_token'] if response.present?
+
+      @ccapi = ConstantContact::Api.new(session[:api_key])
+      @lists = @ccapi.get_lists(@token)
     end
   end
 
