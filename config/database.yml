@@ -1,21 +1,18 @@
-# PostgreSQL. Versions 8.2 and up are supported.
+# PostgreSQL. Versions 7.4 and 8.x are supported.
 #
 # Install the pg driver:
 #   gem install pg
-# On OS X with Homebrew:
-#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
-# On OS X with MacPorts:
+# On Mac OS X with macports:
 #   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
 # On Windows:
 #   gem install pg
 #       Choose the win32 build.
 #       Install PostgreSQL and put its /bin directory on your path.
-#
-# Configure Using Gemfile
-# gem 'pg'
-#
 development:
   adapter: postgresql
   encoding: unicode
   database: mailchimp_post_development
   pool: 5
+  min_messages: WARNING
+  username: MattHall
+  host: localhost

@@ -1,5 +1,6 @@
 class CcController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  before_filter :log_google_analytics_event
 
   def index
     @error = "No parameters received!" unless params.present? && params.length > 2  #action & controller
