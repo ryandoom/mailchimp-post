@@ -37,6 +37,7 @@ gem 'rails_12factor', group: :production
 gem 'byebug', group: :development
 gem 'constantcontact', '~> 1.1.0'
 gem 'simple_form'
+gem 'exception_notification'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
