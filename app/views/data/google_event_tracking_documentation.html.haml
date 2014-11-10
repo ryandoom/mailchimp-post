@@ -1,0 +1,84 @@
+%h1 Google Event Tracking
+%p 
+  With this Silent Post API, you're able to pass in a Google Analytics tracking ID, client ID, and Event parameters in order to register an Event in your Google Analytics Account.
+
+
+%h2 Usage
+%h5 POST URL
+%pre
+
+  :preserve
+    https://mailchimp-post.herokuapp.com/data/google_analytics
+
+%p This event tracking also works in conjunction with the #{link_to "MailChimp", mail_chimp_documentation_path} and #{link_to "Constant Contact", constant_contact_documentation_path} documentation. Follow the MailChimp or Constant Contact documentation but also include the required parameters below in order to utilize the Google Event tracking alongside the MailChimp or Constant Contact functionality.
+
+%h2 Required Parameters
+%ul
+  %li 
+    ga_tracking_id - Your Google Analytics tracking ID. Example: UA-XXXXXX-X
+  %li 
+    ga_client_id - The visitor's tracking ID. Example: 1234567.890123
+    %ul
+      %li= link_to "Getting the Client ID", "https://developers.google.com/analytics/devguides/collection/analyticsjs/domains#getClientId", :target => "_blank"
+
+  %li ga_category - The name of the Google Event category
+
+  %li ga_action - The name of the Google Event action
+  %li ga_label - The name of the Google Event label
+  %li ga_value - The name of the Google Event value
+%h2 DNN FormMaster Settings
+%h3 Setting Event Category
+%ol
+  %li Create a hidden field
+  %li Label: ga_category
+  %li Field name: gacategory
+  %li Auto fill: category name (ex. Form Submission)
+  %li Select silent post
+  %li Send by value: ga_category
+%h3 Setting Event Action
+%ol
+  %li Create a hidden field
+  %li Label: ga_action
+  %li Field name: gaaction
+  %li Auto fill: action name (ex. Name of form submitted - "Contact Form")
+  %li Select silent post
+  %li Send by value: ga_action
+
+%h3 Setting Event Label
+%ol
+  %li Create a hidden field
+  %li Label: ga_label
+  %li Field name: galabel
+  %li Auto fill: label name (ex. email address of submitter)
+  %li Select silent post
+  %li Send by value: ga_label
+
+%h3 Setting GA Tracking ID
+%ol
+  %li Create a hidden field
+  %li Label: ga_tracking_id
+  %li Field Name: gatrackingid
+  %li Auto fill: Google Analytics Tracking ID (ex. UA-XXXXXX-XX)
+  %li Send Value By - silent post, ga_tracking_id
+
+%h3 Setting Client ID
+%ol
+  %li Create a text box
+  %li Label: ga_client_id
+  %li Field Name: gaclientid
+  %li Label Class & Class needs to be a CSS class from the stylesheet that will hide the label and input from the visitor. Ex: .hideInput { display:none; }
+  %li Send Value By - silent post, ga_client_id
+
+
+%h3 Add Javascript to module footer
+Change ids to match ids of input fields for ga_tracking_id and ga_client_id
+%pre
+  :escaped
+    <script type='text/javascript'>
+      jQuery(document).ready(function(){
+        var client_id = '';
+        ga(function(tracker) {
+          jQuery('#THIS_IS_YOUR_CLIENT_ID_INPUT_ID').val(tracker.get('clientId'));
+        });
+      });
+    </script>

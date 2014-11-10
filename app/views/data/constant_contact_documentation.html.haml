@@ -1,0 +1,161 @@
+%h1 Constant Contact Documentation
+
+%h3 Getting Started
+%h5 Finding your API Keys
+
+- if docs_for? 'cc'
+  Constant Contact:
+  = link_to 'http://developer.constantcontact.com/api-keys.html', 'http://developer.constantcontact.com/api-keys.html', :target => '_blank'
+- if docs_for? 'cc'
+  %h5 Create an Access Token (Constant Contact only)
+  %p If you want to use Mailchimp Post with Constant Contact, you'll need to jump through a few extra hoops before you can get the ball rolling.  Mailchimp Post still makes this complicated authentication process quite simple.
+  %p
+    Head over to
+    = link_to 'https://constantcontact.mashery.com/apps/myapps', 'https://constantcontact.mashery.com/apps/myapps', :target => '_blank'
+    and click on the 'Edit' link near the bottom (pictured below).
+  = image_tag 'cc_auth_1.jpg', :class => 'img-responsive'
+  %p
+    You'll need to set the &quot;Redirect uri of oauth calls&quot; field to
+    %code https://mailchimp-post.herokuapp.com/auth/cc/end
+    and click on the &quot;Save&quot; button to continue onward.
+  = image_tag 'cc_auth_2.jpg', :class => 'img-responsive'
+  %p
+    Your Constant Contact application is now ready to be linked to Mailchimp Post!  Make sure you have your API Keys ready, head to
+    = succeed ', ' do
+      = link_to cc_auth_url, cc_auth_url, :target => '_blank'
+    and paste your generated credentials into the form.  You'll be redirected back to Constant Contact's servers again, where you'll need to sign in with your username and password.  After that, you'll just need to confirm access to your account by clicking on the button circled below.
+  = image_tag 'cc_auth_3.jpg', :class => 'img-responsive'
+  %p If everything went smoothly, you should be redirected back to us one last time, where you'll see all of the lists from your Constant Contact account laid out in table format.  Congratulations, your Constant Contact account is now linked to Mailchimp Post!
+
+%hr
+
+%h3 Usage
+%h5 POST URL
+%pre
+  - if docs_for? 'cc'
+    :preserve
+      Constant Contact:  https://mailchimp-post.herokuapp.com/cc/{{YOUR_ACCESS_TOKEN}}
+
+%h5 Example GET parameters
+%pre
+  - if docs_for? 'cc'
+    :preserve
+      Constant Contact:  https://mailchimp-post.herokuapp.com/cc/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX?api_key=XXXXXXXXXXXXXXXXXXXXXXXX&list_id=1&contact[first_name]=Buster&contact[last_name]=Bluth&contact[email]=hello@world.com
+
+%h5 Using curl/POST
+%pre
+  - if docs_for? 'cc'
+    :preserve
+      Constant Contact:  curl --data "?api_key=XXXXXXXXXXXXXXXXXXXXXXXX&list_id=1&contact[first_name]=Buster&contact[last_name]=Bluth&contact[email]=hello@world.com" https://mailchimp-post.herokuapp.com/cc/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+
+%hr
+
+%h3 Parameters
+%h5 Required Parameters
+%pre
+  - if docs_for? 'cc'
+    Constant Contact
+    :preserve
+       - cc/{{YOUR_ACCESS_TOKEN}}
+       - api_key
+       - list_id
+       - contact
+         - email
+
+%h5 Optional Parameters
+%pre
+  - if docs_for? 'cc'
+    Constant Contact
+    :preserve
+       - contact
+         - * (pass in any other variables you want to pass to Constant Contact through the contact hash)
+
+%hr
+
+%h3 For use with DNN Form Master
+%p
+  From
+  = succeed ", " do
+    %strong Settings -> Other Settings
+  set the Silent Post URL to:
+%pre
+  - if docs_for? 'mc'
+    Mailchimp:         https://mailchimp-post.herokuapp.com/data/{{YOUR_API_KEY}}
+  - if docs_for? 'cc'
+    Constant Contact:  https://mailchimp-post.herokuapp.com/cc/{{YOUR_API_KEY}}
+%p
+  On the name field set
+  %code Send Value by Options - Silent Post & Session.
+  %br
+  The value name will just be
+  = succeed "." do
+    - if docs_for? 'both'
+      %code fname
+      (Mailchimp) or
+      %code first_name
+      (Constant Contact)
+    - elsif docs_for? 'mc'
+      %code fname
+    - elsif docs_for? 'cc'
+      %code first_name
+  %br
+  If you have a first name and last name, you will use
+  = succeed "." do
+    - if docs_for? 'both'
+      %code fname
+      (Mailchimp) or
+      %code first_name
+      (Constant Contact)
+    - elsif docs_for? 'mc'
+      %code fname
+    - elsif docs_for? 'cc'
+      %code first_name
+    and
+    - if docs_for? 'both'
+      %code lname
+      (Mailchimp) or
+      %code last_name
+      (Constant Contact)
+    - elsif docs_for? 'mc'
+      %code lname
+    - elsif docs_for? 'cc'
+      %code last_name
+%p
+  On the email field Send Value by Options - Silent Post & Session.
+  %br
+  = succeed "." do
+    Set value name to
+    - if docs_for? 'both'
+      %code email
+      (Mailchimp) or
+      %code contact[email]
+      (Constant Contact)
+    - elsif docs_for? 'mc'
+      %code email
+    - elsif docs_for? 'cc'
+      %code contact[email]
+%p
+  Add a new hidden field called list_id, make sure to hide label and ensure that the type is hidden.
+  %br
+  In the Auto fill set the default text to be the list_id from
+  - if docs_for? 'both'
+    Mailchimp or Constant Contact
+  - elsif docs_for? 'mc'
+    Mailchimp
+  - elsif docs_for? 'cc'
+    Constant Contact
+  %br
+  Send Value by Options - Silent Post & Session and set the value name to
+  = succeed "." do
+    %code list_id
+
+%p Add any other variables as hidden fields and set default text and the value name as well as the silent post & session value.
+%p You may need to go back and check on these fields, seems it doesn't save each time.
+
+.panel.panel-default
+  .panel-body
+    This service was created by 
+    =link_to "Web Ascender", "http://www.webascender.com"
+    |
+    = link_to "Fork this on github", "https://github.com/ryandoom/mailchimp-post"
+

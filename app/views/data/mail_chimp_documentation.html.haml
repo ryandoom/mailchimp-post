@@ -1,0 +1,95 @@
+%h1 MailChimp Documentation
+%h3 Getting Started
+%h5 Finding your API Keys
+%p
+  Mailchimp:
+  = link_to 'http://kb.mailchimp.com/article/where-can-i-find-my-api-key', 'http://kb.mailchimp.com/article/where-can-i-find-my-api-key', :target => '_blank'
+
+%h3 Usage
+%h5 POST URL
+%pre
+
+  :preserve
+    Mailchimp:         https://mailchimp-post.herokuapp.com/data/{{YOUR_API_KEY}}
+
+%h5 Example GET parameters
+%pre
+  :preserve
+    Mailchimp:         https://mailchimp-post.herokuapp.com/data/18he83huhu7339huuh29uhu9ude92d-us?list_id=e24fgz493&email=hello@world.com&FNAME=Buster&lname=Bluth&MERGE1=merge 1 data&MERGE2=merge 2 data
+
+%h5 Using curl/POST
+%pre
+  :preserve
+    Mailchimp:         curl --data "?list_id=e24fgz493&email=hello@world.com&FNAME=the dude&MERGE1=misc1 here&MERGE2=misc 2 here" https://mailchimp-post.herokuapp.com/data/18he83huhu7339huuh29uhu9ude92d-us
+
+%hr
+
+%h3 Parameters
+%h5 Required Parameters
+%pre
+  Mailchimp
+  :preserve
+     - data/{{YOUR_API_KEY}}
+     - list_id
+     - email
+%h5 Optional Parameters
+%pre
+
+  Mailchimp
+  :preserve
+     - MERGE1
+     - FNAME
+     - LNAME
+     - double_optin (pass in true or false, if you don't pass this parameter the default is false)
+     - * (pass in any other variables you want to pass to Mailchimp and it will pass them in to the merge_vars hash)
+
+%hr
+
+%h3 For use with DNN Form Master
+%p
+  From
+  = succeed ", " do
+    %strong Settings -> Other Settings
+  set the Silent Post URL to:
+%pre
+  Mailchimp:         https://mailchimp-post.herokuapp.com/data/{{YOUR_API_KEY}}
+
+%p
+  On the name field set
+  %code Send Value by Options - Silent Post & Session.
+  %br
+  The value name will just be
+  = succeed "." do
+    %code fname
+  %br
+  If you have a first name and last name, you will use
+  = succeed "." do
+    %code fname
+    %code lname
+
+%p
+  On the email field Send Value by Options - Silent Post & Session.
+  %br
+  = succeed "." do
+    Set value name to
+    %code email
+%p
+  Add a new hidden field called list_id, make sure to hide label and ensure that the type is hidden.
+  %br
+  In the Auto fill set the default text to be the list_id from
+  Mailchimp
+  %br
+  Send Value by Options - Silent Post & Session and set the value name to
+  = succeed "." do
+    %code list_id
+
+%p Add any other variables as hidden fields and set default text and the value name as well as the silent post & session value.
+%p You may need to go back and check on these fields, seems it doesn't save each time.
+
+.panel.panel-default
+  .panel-body
+    This service was created by 
+    =link_to "Web Ascender", "http://www.webascender.com"
+    |
+    = link_to "Fork this on github", "https://github.com/ryandoom/mailchimp-post"
+

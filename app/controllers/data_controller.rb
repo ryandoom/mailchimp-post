@@ -7,7 +7,22 @@ class DataController < ApplicationController
   end
 
   def show
-    render :text => logit(params) 
+    debugger;1
+    unless params[id] == "google_analytics"
+      render :text => logit(params) 
+    end
+  end
+
+  def mail_chimp_documentation
+    
+  end
+
+  def constant_contact_documentation
+    
+  end
+
+  def google_event_tracking_documentation
+    
   end
 
   def update

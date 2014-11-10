@@ -9,6 +9,10 @@ MailchimpPost::Application.routes.draw do
   resources :data
   match "data/:id" => "data#index", :via => [:get,:post]
 
+  get "mail_chimp_documentation" => "data#mail_chimp_documentation", :as => :mail_chimp_documentation
+  get "constant_contact_documentation" => "data#constant_contact_documentation", :as => :constant_contact_documentation
+  get "google_event_tracking_documentation" => "data#google_event_tracking_documentation", :as => :google_event_tracking_documentation
+  
   root "data#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
