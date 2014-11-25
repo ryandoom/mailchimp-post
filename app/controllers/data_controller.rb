@@ -3,7 +3,6 @@ class DataController < ApplicationController
   before_filter :log_google_analytics_event
 
   def index
-    Log.create(:post_type => "MailChimp", :params => params)
     render :text => logit(params) if params.present? && params.length > 2 && !params.has_key?(:docs)  #action & controller
   end
 
@@ -33,6 +32,7 @@ class DataController < ApplicationController
   end
 
   def logit(params)
+    Log.create(:post_type => "MailChimp", :params => params.to_s)
     params.delete(:action)
     params.delete(:controller)
 
