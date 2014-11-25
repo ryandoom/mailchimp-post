@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Post type:</strong>
+  <%= @log.post_type %>
+</p>
+
+<p>
+  <strong>Params:</strong>
+  <%= @log.params %>
+</p>
+
+<%= link_to 'Edit', edit_log_path(@log) %> |
+<%= link_to 'Back', logs_path %>

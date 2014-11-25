@@ -25,4 +25,12 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def authenticate_action
+    if Rails.env.production?
+      authenticate_or_request_with_http_basic do |username, password|
+        username == "webascender" && password == "rAj0Coit1thuB7uV4Paj0"
+      end
+    end
+  end
 end

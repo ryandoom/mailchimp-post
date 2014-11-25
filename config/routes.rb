@@ -1,5 +1,7 @@
 MailchimpPost::Application.routes.draw do
 
+  resources :logs, :except => [:new, :create, :edit, :update, :destroy]
+
   resources :cc, :except => [:show]
   match "cc/:id" => "cc#index", :via => [:get,:post], :as => :cc_subscribe
   match "auth/cc" => "cc#auth", :via => [:get,:post], :as => :cc_auth
@@ -69,3 +71,38 @@ MailchimpPost::Application.routes.draw do
   #     resources :products
   #   end
 end
+#== Route Map
+# Generated on 25 Nov 2014 09:26
+#
+#                                logs GET      /logs(.:format)                                logs#index
+#                                     POST     /logs(.:format)                                logs#create
+#                             new_log GET      /logs/new(.:format)                            logs#new
+#                            edit_log GET      /logs/:id/edit(.:format)                       logs#edit
+#                                 log GET      /logs/:id(.:format)                            logs#show
+#                                     PATCH    /logs/:id(.:format)                            logs#update
+#                                     PUT      /logs/:id(.:format)                            logs#update
+#                                     DELETE   /logs/:id(.:format)                            logs#destroy
+#                            cc_index GET      /cc(.:format)                                  cc#index
+#                                     POST     /cc(.:format)                                  cc#create
+#                              new_cc GET      /cc/new(.:format)                              cc#new
+#                             edit_cc GET      /cc/:id/edit(.:format)                         cc#edit
+#                                  cc PATCH    /cc/:id(.:format)                              cc#update
+#                                     PUT      /cc/:id(.:format)                              cc#update
+#                                     DELETE   /cc/:id(.:format)                              cc#destroy
+#                        cc_subscribe GET|POST /cc/:id(.:format)                              cc#index
+#                             cc_auth GET|POST /auth/cc(.:format)                             cc#auth
+#                       cc_auth_start GET|POST /auth/cc/start(.:format)                       cc#auth_start
+#                         cc_auth_end GET|POST /auth/cc/end(.:format)                         cc#auth_end
+#                                data GET      /data(.:format)                                data#index
+#                                     POST     /data(.:format)                                data#create
+#                           new_datum GET      /data/new(.:format)                            data#new
+#                          edit_datum GET      /data/:id/edit(.:format)                       data#edit
+#                               datum GET      /data/:id(.:format)                            data#show
+#                                     PATCH    /data/:id(.:format)                            data#update
+#                                     PUT      /data/:id(.:format)                            data#update
+#                                     DELETE   /data/:id(.:format)                            data#destroy
+#                                     GET|POST /data/:id(.:format)                            data#index
+#            mail_chimp_documentation GET      /mail_chimp_documentation(.:format)            data#mail_chimp_documentation
+#      constant_contact_documentation GET      /constant_contact_documentation(.:format)      data#constant_contact_documentation
+# google_event_tracking_documentation GET      /google_event_tracking_documentation(.:format) data#google_event_tracking_documentation
+#                                root GET      /                                              data#index

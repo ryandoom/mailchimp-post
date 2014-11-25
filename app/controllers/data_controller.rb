@@ -3,11 +3,11 @@ class DataController < ApplicationController
   before_filter :log_google_analytics_event
 
   def index
+    Log.create(:post_type => "MailChimp", :params => params)
     render :text => logit(params) if params.present? && params.length > 2 && !params.has_key?(:docs)  #action & controller
   end
 
   def show
-    debugger;1
     unless params[id] == "google_analytics"
       render :text => logit(params) 
     end
