@@ -72,16 +72,10 @@ MailchimpPost::Application.routes.draw do
   #   end
 end
 #== Route Map
-# Generated on 25 Nov 2014 09:26
+# Generated on 16 Jan 2015 16:40
 #
 #                                logs GET      /logs(.:format)                                logs#index
-#                                     POST     /logs(.:format)                                logs#create
-#                             new_log GET      /logs/new(.:format)                            logs#new
-#                            edit_log GET      /logs/:id/edit(.:format)                       logs#edit
 #                                 log GET      /logs/:id(.:format)                            logs#show
-#                                     PATCH    /logs/:id(.:format)                            logs#update
-#                                     PUT      /logs/:id(.:format)                            logs#update
-#                                     DELETE   /logs/:id(.:format)                            logs#destroy
 #                            cc_index GET      /cc(.:format)                                  cc#index
 #                                     POST     /cc(.:format)                                  cc#create
 #                              new_cc GET      /cc/new(.:format)                              cc#new
