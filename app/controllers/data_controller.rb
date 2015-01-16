@@ -32,7 +32,7 @@ class DataController < ApplicationController
   end
 
   def logit(params)
-    Log.create(:post_type => "MailChimp", :params => params.to_s)
+    Log.create(:post_type => "MailChimp", :params => params.to_s, :referral_source => request.referer)
     params.delete(:action)
     params.delete(:controller)
 
