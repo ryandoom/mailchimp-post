@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
         t: "event",
         ec: params[:ga_category],
         ea: params[:ga_action],
-        el: params[:ga_action],
+        el: params[:ga_label],
         dh: params[:dh]
       }
 
