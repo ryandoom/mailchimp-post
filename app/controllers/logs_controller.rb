@@ -5,7 +5,12 @@ class LogsController < ApplicationController
   # GET /logs
   # GET /logs.json
   def index
-    @logs = Log.all
+    page_size = 2
+    
+    @logs = Log.scoped
+    @logs = @logs.page(params[:page]).per(page_size)
+    @logs = @logs.order("created_at DESC")
+
   end
 
   # GET /logs/1

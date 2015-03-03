@@ -1,5 +1,8 @@
 <h1>Listing logs</h1>
 
+<div class="pull-right">
+<%= paginate(@logs) %>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -19,3 +22,6 @@
     <% end %>
   </tbody>
 </table>
+<div class="pull-right">
+<%= paginate(@logs) %>
+</div>

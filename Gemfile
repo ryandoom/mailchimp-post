@@ -26,7 +26,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'newrelic_rpm'
 gem 'rest_client'
-
+gem 'kaminari'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 

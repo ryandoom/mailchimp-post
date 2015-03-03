@@ -46,10 +46,11 @@ class DataController < ApplicationController
   
 
     if !has_spam_content && params[:id].present? && params[:list_id].present? && params[:email].present?
+      Gibbon::API.throws_exceptions = false
       gb = Gibbon::API.new(params[:id])
-      gb.lists.subscribe({:id => params[:list_id], :email => {:email => params[:email]}, :merge_vars => params, :double_optin => double_optin})
+      response = gb.lists.subscribe({:id => params[:list_id], :email => {:email => params[:email]}, :merge_vars => params, :double_optin => double_optin})
     end
-
-    return params
+    
+    return response
   end
 end
