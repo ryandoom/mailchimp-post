@@ -32,7 +32,10 @@ class DataController < ApplicationController
   end
 
   def logit(params)
-    Log.create(:post_type => "MailChimp", :params => params.to_s, :referral_source => request.referer)
+    if params[:debug].present?
+      Log.create(:post_type => "MailChimp", :params => params.to_s, :referral_source => request.referer)
+    end
+    
     params.delete(:action)
     params.delete(:controller)
 
@@ -50,7 +53,7 @@ class DataController < ApplicationController
       gb = Gibbon::API.new(params[:id])
       response = gb.lists.subscribe({:id => params[:list_id], :email => {:email => params[:email]}, :merge_vars => params, :double_optin => double_optin})
     end
-    
+
     return response
   end
 end

@@ -3,7 +3,11 @@ class CcController < ApplicationController
   before_filter :log_google_analytics_event
 
   def index
-    Log.create(:post_type => "MailChimp", :params => params.to_s, :referral_source => request.referer)
+    
+    if params[:debug].present? 
+      Log.create(:post_type => "MailChimp", :params => params.to_s, :referral_source => request.referer)
+    end
+
     @error = "No parameters received!" unless params.present? && params.length > 2  #action & controller
     @error = "ID not found!" unless params.has_key? :id
     @error = "No API Key received!" unless params.has_key? :api_key
