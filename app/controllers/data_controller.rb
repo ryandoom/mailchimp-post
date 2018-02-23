@@ -7,7 +7,7 @@ class DataController < ApplicationController
   end
 
   def show
-    unless params[id] == "google_analytics"
+    unless params[:id] == "google_analytics"
       render :text => logit(params) 
     end
   end
